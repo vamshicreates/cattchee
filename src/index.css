@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Nunito', 'Montserrat', sans-serif;
+  touch-action: manipulation;
+}
+
+.font-baba-script {
+  font-family: 'Caveat', cursive;
+}
+
+.font-baba-title {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.font-baba-display {
+  font-family: 'Fredoka', 'Montserrat', sans-serif;
+}
+
+/* Custom mobile glassmorphism & gradients */
+.baba-gradient {
+  background: linear-gradient(180deg, #FF6600 0%, #FF8533 100%);
+}
+
+.baba-btn-gradient {
+  background: linear-gradient(135deg, #FF6200 0%, #FF8A00 100%);
+  box-shadow: 0 8px 24px rgba(255, 98, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+.baba-btn-gradient:active {
+  transform: scale(0.96);
+  box-shadow: 0 4px 12px rgba(255, 98, 0, 0.3);
+}
+
+/* Rolling conveyor animation for lane guides */
+@keyframes beltMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 40px; }
+}
+
+.conveyor-bg {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+}
+
+@keyframes bounceShort {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(255, 94, 0, 0.4); }
+  50% { box-shadow: 0 0 30px rgba(255, 94, 0, 0.8); }
+}
+
+@keyframes shakeAnim {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.animate-bounce-short {
+  animation: bounceShort 1.5s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.animate-shake {
+  animation: shakeAnim 0.35s ease-in-out;
+}
