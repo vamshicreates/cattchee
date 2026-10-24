@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, ShoppingBag, Check, Share2, Tag, Sparkles } from 'lucide-react';
 import { sound } from '../utils/audio';
+import { TShirtSVG, TShirtColor } from './TShirt';
 
 interface StoreModalProps {
   isOpen: boolean;
@@ -13,6 +14,7 @@ interface Product {
   name: string;
   originalPrice: number;
   color: string;
+  tshirtColor: TShirtColor;
   tag: string;
   imageColor: string;
   description: string;
@@ -24,6 +26,7 @@ const PRODUCTS: Product[] = [
     name: 'The Meditating Baba Graphic Tee',
     originalPrice: 499,
     color: 'Orange / White',
+    tshirtColor: 'orange',
     tag: 'Bestseller',
     imageColor: '#F97316',
     description: '100% Super-combed cotton with the signature meditating Yogi Baba print.',
@@ -33,6 +36,7 @@ const PRODUCTS: Product[] = [
     name: 'Cattchee "Catch The Tee" Edition',
     originalPrice: 549,
     color: 'Royal Blue',
+    tshirtColor: 'blue',
     tag: 'Game Edition',
     imageColor: '#2563EB',
     description: 'Special tribute t-shirt honoring the unreleased hypercasual game idea!',
@@ -42,6 +46,7 @@ const PRODUCTS: Product[] = [
     name: 'Code, Chai & Hustle Oversized Tee',
     originalPrice: 649,
     color: 'Jet Black',
+    tshirtColor: 'black',
     tag: 'Trending',
     imageColor: '#1E293B',
     description: 'Heavyweight 240 GSM French terry cotton with relaxed streetwear drop-shoulder fit.',
@@ -51,6 +56,7 @@ const PRODUCTS: Product[] = [
     name: 'Minimalist Sunshine Pocket Tee',
     originalPrice: 449,
     color: 'Sunny Yellow',
+    tshirtColor: 'yellow',
     tag: 'Summer Classic',
     imageColor: '#EAB308',
     description: 'Ultra-soft breathable organic cotton for everyday effortless comfort.',
@@ -60,6 +66,7 @@ const PRODUCTS: Product[] = [
     name: 'Neon Cyberpunk Baba Tee',
     originalPrice: 699,
     color: 'Neon Pink / Purple',
+    tshirtColor: 'pink',
     tag: 'Limited Drop',
     imageColor: '#EC4899',
     description: 'Glow-in-the-dark silkscreen typography designed for creators and gamers.',
@@ -153,12 +160,9 @@ export const StoreModal: React.FC<StoreModalProps> = ({ isOpen, onClose, earnedD
           <div className="bg-gradient-to-br from-orange-50/50 to-white p-4 rounded-2xl border-2 border-orange-200/80 shadow-sm">
             <div className="flex gap-4 items-center">
               {/* Tee Color Box */}
-              <div
-                style={{ backgroundColor: selectedProduct.imageColor }}
-                className="w-20 h-24 rounded-2xl flex items-center justify-center shadow-inner relative overflow-hidden"
-              >
-                <div className="text-3xl filter drop-shadow">👕</div>
-                <span className="absolute top-1 left-1 bg-black/40 text-[9px] text-white px-1.5 py-0.5 rounded font-bold">
+              <div className="w-24 h-24 rounded-2xl bg-orange-100/50 flex items-center justify-center relative overflow-hidden border border-orange-200 shadow-inner shrink-0">
+                <TShirtSVG color={selectedProduct.tshirtColor} size={70} />
+                <span className="absolute top-1 left-1 bg-black/60 text-[9px] text-white px-1.5 py-0.5 rounded font-bold">
                   {selectedProduct.tag}
                 </span>
               </div>
@@ -237,11 +241,8 @@ export const StoreModal: React.FC<StoreModalProps> = ({ isOpen, onClose, earnedD
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <div
-                        style={{ backgroundColor: prod.imageColor }}
-                        className="w-10 h-10 rounded-lg flex items-center justify-center text-lg shadow-sm"
-                      >
-                        👕
+                      <div className="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center shadow-sm shrink-0 border border-orange-100">
+                        <TShirtSVG color={prod.tshirtColor} size={38} />
                       </div>
                       <div>
                         <div className="text-xs font-bold text-gray-800 line-clamp-1">

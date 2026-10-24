@@ -55,6 +55,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
 
           <button
             onClick={() => {
+              sound.unlock();
               sound.playClick();
               onToggleSound();
             }}
@@ -91,6 +92,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       <div className="z-10 flex flex-col items-center justify-center my-auto">
         <button
           onClick={() => {
+            sound.unlock();
             sound.playClick();
             onStartGame(selectedMode);
           }}
@@ -143,6 +145,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           {/* Weekly Challenge Gift Box Button */}
           <button
             onClick={() => {
+              sound.unlock();
               sound.playClick();
               onStartGame('weekly');
             }}

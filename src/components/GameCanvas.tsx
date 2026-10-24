@@ -152,7 +152,7 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
       color,
       isSpecial,
       lane,
-      y: -15, // start just above the view
+      y: -20, // start just above the view
       speed: baseSpeed + speedBoost + (Math.random() * 0.08 - 0.04),
       rotation: (Math.random() - 0.5) * 12,
     };
@@ -185,7 +185,7 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
           const nextY = t.y + t.speed * (delta / 16);
 
           // If reached bottom without being tapped
-          if (nextY > 105) {
+          if (nextY > 108) {
             // If the player let a TARGET tee slip by in classic mode
             if (t.color === currentTargetColor && mode === 'classic' && !isGameOverRef.current) {
               setLives((l) => {
@@ -230,6 +230,7 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
 
   // Handle player tapping a t-shirt
   const handleTeeTap = (tee: ActiveTee, e: React.MouseEvent | React.TouchEvent) => {
+    sound.unlock();
     if (isPaused || isGameOverRef.current) return;
 
     // Get tap coordinate for floating popup
@@ -409,15 +410,14 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
       </div>
 
       {/* Target Prompt Banner (The Iconic "Catch the red tee") */}
-      <div className="z-10 bg-white/95 backdrop-blur-md px-4 py-2.5 shadow-md flex items-center justify-between border-b-2 border-orange-200">
-        <div className="flex items-center space-x-2">
+      <div className="z-10 bg-white/95 backdrop-blur-md px-4 py-2 shadow-md flex items-center justify-between border-b-2 border-orange-200">
+        <div className="flex items-center space-x-2.5">
           <div
-            style={{ backgroundColor: currentConf.hex }}
-            className={`w-9 h-9 rounded-xl flex items-center justify-center text-white shadow-md transition-transform duration-300 ${
+            className={`transition-transform duration-300 filter drop-shadow ${
               promptAnimation ? 'scale-125 rotate-12' : 'scale-100'
             }`}
           >
-            <span className="text-xl">👕</span>
+            <TShirtSVG color={currentTargetColor} size={46} />
           </div>
 
           <div>
@@ -450,7 +450,7 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
           <div className="w-1/3" />
         </div>
 
-        {/* Rolling T-Shirts */}
+        {/* Rolling T-Shirts (Scaled up for bold mobile touch experience) */}
         {tees.map((tee) => {
           // Lane offsets: 0 -> 16.6%, 1 -> 50%, 2 -> 83.3%
           const leftPercent = tee.lane === 0 ? '16.6%' : tee.lane === 1 ? '50%' : '83.3%';
@@ -466,9 +466,9 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
                 zIndex: 5,
               }}
               onPointerDown={(e) => handleTeeTap(tee, e)}
-              className="touch-none cursor-pointer filter drop-shadow-lg active:scale-90 transition-transform select-none"
+              className="touch-none cursor-pointer filter drop-shadow-lg active:scale-90 transition-transform select-none p-1 flex items-center justify-center min-w-[105px] min-h-[110px]"
             >
-              <TShirtSVG color={tee.color} isSpecial={tee.isSpecial} size={74} />
+              <TShirtSVG color={tee.color} isSpecial={tee.isSpecial} size={105} />
             </div>
           );
         })}

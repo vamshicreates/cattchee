@@ -55,7 +55,7 @@ interface TShirtProps {
 export const TShirtSVG: React.FC<TShirtProps> = ({
   color,
   isSpecial,
-  size = 80,
+  size = 105,
   className = '',
   onClick,
 }) => {
